@@ -107,7 +107,12 @@
             let heightValue = heightInput.value;
 
             if (weightValue.trim() == ''|| heightValue.trim()==''){
-                alert('input valid weight and height')
+                alert('input valid weight and height');
+                return
+            }
+
+            if (weightValue < 0 || heightValue < 0){
+                alert('weight and height cannot be negative');
                 return
             }
             
