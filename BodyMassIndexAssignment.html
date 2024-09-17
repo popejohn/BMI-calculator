@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Mass Index Calculator</title>
+</head>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        body{
+            background-color: rgb(142, 36, 241);
+        }
+        h2{
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+        }
+        h2::first-letter{
+            font-size: 35px;
+        }
+        .calculator{
+            color: orange;
+        }
+        .top-input input{
+            height: 30px;
+            width: 45%;
+            border-radius: 5px;
+            outline: 1px solid rgb(223, 174, 223);
+            border: none;
+            padding: 3px;
+        }
+        .container{
+            box-shadow: 0 0 5px 2px rgb(250, 224, 250);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            gap: 20px;
+        }
+        button{
+            outline: none;
+            border: 1px solid white;
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .key-display{
+            display: flex;
+            justify-content: start;
+            gap: 20px;
+        }
+        button:focus{
+            transform: translateY(-1px);
+            transition-property: all;
+            transition-duration: 70ms;
+            transition-timing-function: ease-out;
+        }
+        #display{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(247, 243, 252);
+            border-radius: 10px;
+            box-shadow: 0 0 5px 2px rgb(195, 195, 196);
+        }
+        #display span{
+            color: red;
+            font-weight: bold;
+            font-size: large;
+        }
+        #display p:nth-of-type(2){
+            color: purple;
+     }
+    </style>
+    <body>
+        <h2 class="title">BMI <span class="calculator">calculator</span></h2>
+        <div class="container" style="width: 480px; height: 60%; margin: auto auto; padding: 20px;">
+            <div class="top-input"> 
+                <input type="number" placeholder="input weight (kg)" id="weight">
+                <input type="number" style="margin-left: 20px;" placeholder="input height (m)" id="height">
+            </div>
+            <div style="width: 80%; height: 50px; background-color: white; border-radius: 10px; padding: 5px 20px;" id="display">
+                
+            </div><button id="compute" style="width: 150px;" onclick="displayBMI()"> Compute BMI </button>
+        </div>
+    </body>
+    </html>
+    <script>
+        let heightInput = document.querySelector('#height');
+        let weightInput = document.querySelector('#weight');
+
+        function BMICompute(weight, height) {
+            return weight / (height**2)
+        }
+        
+        function displayBMI() {
+            document.getElementById('display').innerHTML = ''
+            let weightValue = weightInput.value;
+            let heightValue = heightInput.value;
+
+            if (weightValue.trim() == ''|| heightValue.trim()==''){
+                alert('input valid weight and height')
+                return
+            }
+            
+            let BMI = BMICompute(weightValue, heightValue);
+            if (BMI < 18.5) {
+                document.getElementById('display').innerHTML = `<p> BMI = <b>${BMI}</b> </p><p>You are underweight</p>`
+            } else if (BMI >= 18.5 && BMI <= 24.9){
+                document.getElementById('display').innerHTML = `<p> BMI = <b>${BMI}</b> </p><p>You are in great shape</p>`
+            } else if (BMI > 24.9 && BMI <= 29.9){
+                document.getElementById('display').innerHTML = `<p> BMI = <b>${BMI}</b> </p><p>You are overweight</p>`
+            }else{
+                document.getElementById('display').innerHTML = `<p> BMI = <b>${BMI}</b> </p><p>You are <span>Obese!</span></p>`
+            }
+           
+        }
+        
+    </script>
